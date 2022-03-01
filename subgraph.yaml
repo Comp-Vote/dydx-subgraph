@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: DydxToken
-    network: {{network}}
+    network: mainnet
     source:
-      address: "{{dydxTokenAddress}}"
+      address: "0x92D6C1e31e14520e676a687F0a93788B716BEff5"
       abi: DydxToken
-      startBlock: {{startBlock}}
+      startBlock: 12809555
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -26,11 +26,11 @@ dataSources:
       file: ./src/token.ts
   - kind: ethereum/contract
     name: DydxGovernor
-    network: {{network}}
+    network: mainnet
     source:
-      address: "{{dydxGovernorAddress}}"
+      address: "0x7E9B1672616FF6D6629Ef2879419aaE79A9018D2"
       abi: DydxGovernor
-      startBlock: {{startBlock}}
+      startBlock: 12809555
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -46,14 +46,20 @@ dataSources:
           handler: handleProposalCreated
         - event: VoteEmitted(uint256,indexed address,bool,uint256)
           handler: handleVoteEmitted
+        - event: ProposalCanceled(uint256)
+          handler: handleProposalCanceled
+        - event: ProposalQueued(uint256,uint256,indexed address)
+          handler: handleProposalQueued
+        - event: ProposalExecuted(uint256,indexed address)
+          handler: handleProposalExecuted
       file: ./src/proposal.ts
   - kind: ethereum/contract
     name: SafetyModule
-    network: {{network}}
+    network: mainnet
     source:
-      address: "{{safetyModuleAddress}}"
+      address: "0x65f7BA4Ec257AF7c55fd5854E5f6356bBd0fb8EC"
       abi: SafetyModule
-      startBlock: {{startBlock}}
+      startBlock: 12809555
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -73,11 +79,11 @@ dataSources:
       file: ./src/safety-module.ts
   - kind: ethereum/contract
     name: MerkleDistributor
-    network: {{network}}
+    network: mainnet
     source:
-      address: "{{merkleDistributorAddress}}"
+      address: "0x01d3348601968aB85b4bb028979006eac235a588"
       abi: MerkleDistributor
-      startBlock: {{startBlock}}
+      startBlock: 12809555
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -93,11 +99,11 @@ dataSources:
       file: ./src/merkle-distributor.ts
   - kind: ethereum/contract
     name: LiquidityStaking
-    network: {{network}}
+    network: mainnet
     source:
-      address: "{{liquidityStakingAddress}}"
+      address: "0x5Aa653A076c1dbB47cec8C1B4d152444CAD91941"
       abi: LiquidityStaking
-      startBlock: {{startBlock}}
+      startBlock: 12809555
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
