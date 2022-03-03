@@ -68,7 +68,10 @@ export function handleVoteEmitted(event: VoteEmitted): void {
 
   proposalVote.save()
 
-  let user: User = getUser(event.params.voter)
-  user.numberVotes = user.numberVotes + 1
-  user.save()
+  // Ignore 0 weight votes
+  if(event.params.votingPower > BigInt.fromI32(0)) {
+    let user: User = getUser(event.params.voter)
+    user.numberVotes = user.numberVotes + 1
+    user.save()
+  }
 }
