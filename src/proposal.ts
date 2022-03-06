@@ -13,6 +13,7 @@ export function handleProposalCreated(event: ProposalCreated): void {
   let proposal: Proposal = getProposal(event.params.id)
 
   proposal.proposer = getUser(event.params.creator).id
+  proposal.targets = changetype<Bytes[]>(event.params.targets)
   proposal.values = event.params.values
   proposal.signatures = event.params.signatures
   proposal.calldatas = event.params.calldatas
