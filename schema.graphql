@@ -103,6 +103,14 @@ type RewardsClaimed @entity {
   rewards: BigInt!
 }
 
+type Governance @entity {
+  "Unique entity used to keep track of common aggregated data"
+  id: ID!
+
+  "Number of proposals created"
+  proposals: BigInt!
+}
+
 enum IncentivesModule {
   MerkleDistributor
   SafetyModule

@@ -1,5 +1,5 @@
 import { Address, BigInt, Bytes } from "@graphprotocol/graph-ts"
-import { getUser, getProposal, getProposalVote } from "./helpers";
+import { getUser, getProposal, getProposalVote, getGovernanceEntity } from "./helpers";
 import {
   ProposalCreated,
   VoteEmitted,
@@ -7,7 +7,7 @@ import {
   ProposalQueued,
   ProposalExecuted
 } from "../generated/DydxGovernor/DydxGovernor"
-import { Proposal, ProposalVote, User } from "../generated/schema"
+import { Proposal, ProposalVote, User, Governance } from "../generated/schema"
 
 export function handleProposalCreated(event: ProposalCreated): void {
   let proposal: Proposal = getProposal(event.params.id)
@@ -26,6 +26,10 @@ export function handleProposalCreated(event: ProposalCreated): void {
   proposal.ipfsHash = event.params.ipfsHash
 
   proposal.save()
+
+  let governance: Governance = getGovernanceEntity();
+  governance.proposals = governance.proposals + BigInt.fromI32(1);
+  governance.save();
 }
 
 export function handleProposalCanceled(event: ProposalCanceled): void {

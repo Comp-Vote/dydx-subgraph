@@ -1,5 +1,5 @@
 import { Address, BigInt } from '@graphprotocol/graph-ts'
-import { User, Proposal, ProposalVote, RewardsClaimed } from '../generated/schema';
+import { User, Proposal, ProposalVote, RewardsClaimed, Governance } from '../generated/schema';
 
 export const ADDRESS_ZERO = '0x0000000000000000000000000000000000000000'
 
@@ -96,4 +96,15 @@ export function changeUserStakedTokenBalance(address: Address, amount: BigInt, a
   }
 
   user.save()
+}
+
+export function getGovernanceEntity(): Governance {
+  let governance = Governance.load("GOVERNANCE");
+
+  if (governance == null) {
+    governance = new Governance("GOVERNANCE");
+    governance.proposals = BigInt.fromI32(0);
+  }
+
+  return governance as Governance;
 }
