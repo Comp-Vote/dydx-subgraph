@@ -5,8 +5,16 @@ type User @entity {
   totalStakedTokens: BigInt!
   votingPower: BigInt!
   proposingPower: BigInt!
+
+  " Voting power from dydx token "
   tokenVotingPower: BigInt!
   tokenProposingPower: BigInt!
+
+  " Voting power from wrapped tokens "
+  wrappedTokenVotingPower: BigInt!
+  wrappedTokenProposingPower: BigInt!
+
+  " Voting power from staked tokens "
   stakedTokenVotingPower: BigInt!
   stakedTokenProposingPower: BigInt!
 

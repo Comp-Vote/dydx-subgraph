@@ -1,4 +1,4 @@
-specVersion: 0.0.2
+specVersion: 0.0.5
 schema:
   file: ./schema.graphql
 dataSources:
@@ -11,7 +11,7 @@ dataSources:
       startBlock: 12809555
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - User
@@ -25,6 +25,28 @@ dataSources:
           handler: handleTokenDelegation
       file: ./src/token.ts
   - kind: ethereum/contract
+    name: WrappedDydxToken
+    network: mainnet
+    source:
+      address: "0x46b2deae6eff3011008ea27ea36b7c27255ddfa9"
+      abi: WrappedDydxToken
+      startBlock: 18112365
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - User
+      abis:
+        - name: WrappedDydxToken
+          file: ./abi/contracts/governance/token/WrappedDydxToken.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTokenTransfer
+        - event: DelegatedPowerChanged(indexed address,uint256,uint8)
+          handler: handleTokenDelegation
+      file: ./src/wrapped-token.ts
+  - kind: ethereum/contract
     name: DydxGovernor
     network: mainnet
     source:
@@ -33,7 +55,7 @@ dataSources:
       startBlock: 12809555
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Proposal
@@ -62,7 +84,7 @@ dataSources:
       startBlock: 12809555
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - User
@@ -86,7 +108,7 @@ dataSources:
       startBlock: 12809555
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - User
@@ -106,7 +128,7 @@ dataSources:
       startBlock: 12809555
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - User
